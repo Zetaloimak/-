@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Html.server/3912/user/</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- จุดแสงพื้นหลังที่ลอยช้าๆ -->
+  <div class="bg-blob bg-blob-a" aria-hidden="true"></div>
+  <div class="bg-blob bg-blob-b" aria-hidden="true"></div>
+
+  <!-- ชั้นหัวใจลอยพื้นหลัง -->
+  <div id="hearts" aria-hidden="true"></div>
+
+  <main class="card">
+
+    <!-- ขั้นที่ 1: รักแฟนไหม -->
+    <section class="step active" id="step-love">
+      <div class="emoji">💕</div>
+      <h1>ร้ากป๊าหม้ายยย</h1>
+      <div class="btn-row">
+        <button class="btn btn-yes" id="btn-yes">ร้ากกก 💗</button>
+        <button class="btn btn-no" id="btn-no">ม่ายอ่ะะ</button>
+      </div>
+      <button class="btn btn-submit hidden" id="btn-sure">ช่าย</button>
+      <p class="fade-msg" id="sad-msg"></p>
+    </section>
+
+    <!-- ขั้นที่ 2: วันเกิดและวันครบรอบ -->
+    <section class="step" id="step-date">
+      <h2>ง้านนนน</h2>
+      <p>ถ้าร้ากจริงตอบห้ายด้ายยยย</p>
+      <label>
+        วันเกิดป๊าาา
+        <input type="text" id="birthday" placeholder="วัน/เดือน" autocomplete="off" />
+      </label>
+      <label>
+        วันครบรอบบบบ(แบบหม่ายน้าาา)
+        <input type="text" id="anniversary" placeholder="วัน/เดือน" autocomplete="off" />
+      </label>
+      <button class="btn btn-submit" id="btn-date">ส่งตรงนี้้ 💌</button>
+      <p class="msg" id="msg-date"></p>
+    </section>
+
+    <!-- ขั้นที่ 3: ป๊าชอบทำอะไร -->
+    <section class="step" id="step-q2">
+      <div class="emoji">💻</div>
+      <h2>ป๊าชอบรายยย</h2>
+      <p class="hint">ใบ้ : ชอบปายซ้อมทุกกกเช้าา</p>
+      <p class="hint">อย่าเบิ้ลโค้ดมานอ่านม่ายด้าย/พิมห้ายถูกด้วยย</p>
+      <input type="text" id="hobby" placeholder="พิมพ์คำตอบตรงนี้" autocomplete="off" />
+      <button class="btn btn-submit" id="btn-q2">ส่งน้าค้าบบบ 💌</button>
+      <p class="msg" id="msg-q2"></p>
+    </section>
+
+    <!-- ขั้นที่ 4: ป๊ากลัวอะไรมากที่สุด (ตอบถูกแล้วไปหน้าจดหมายเลย) -->
+    <section class="step" id="step-q3">
+      <div class="emoji">😨</div>
+      <h2>ป๊ากลัวอะรายมากที่สุดดด</h2>
+      <p class="hint">ใบ้ : กำลังตอบคำถามนี้ยุุ</p>
+      <p class="hint">อย่าเบิ้ลโค้ดมานอ่านม่ายด้าย/พิมห้ายถูกด้วยย</p>
+      <input type="text" id="fear" placeholder="พิมพ์คำตอบตรงนี้" autocomplete="off" />
+      <button class="btn btn-submit" id="btn-q3">ส่งงงง 💌</button>
+      <p class="msg" id="msg-q3"></p>
+    </section>
+
+    <!-- ขั้นจดหมาย: ต้องกดรักให้ครบ 100 ครั้งก่อนถึงจะเปิดได้ -->
+    <section class="step" id="step-letter">
+      <div class="gate">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="ring-track" cx="60" cy="60" r="52" />
+          <circle class="ring-fill" id="ring-fill" cx="60" cy="60" r="52" />
+        </svg>
+        <span class="gate-icon" aria-hidden="true">💌</span>
+      </div>
+      <h2>มีจดหมายถึงเด่กก</h2>
+      <p>กดก่อนถึงมานจาเปิดด</p>
+      <button class="btn btn-yes" id="btn-letter-unlock">รัก 💗</button>
+      <p class="msg" id="unlock-count">กดรักปายแย้ว 0/100 ครั้ง</p>
+    </section>
+
+    <!-- ขั้นเปิดจดหมายแล้ว: ตราประทับแตก → จดหมายค่อยๆ ปรากฏ → ข้อความทยอยขึ้น -->
+    <section class="step" id="step-letter-open">
+      <div class="letter-wrap" id="letter-wrap">
+        <div class="seal" aria-hidden="true">💗</div>
+        <article class="letter" id="letter">
+          <p class="letter-title" style="--d:0">ถึงอัยเด่กกก💗</p>
+          <p style="--d:1">ขอบคุนน้าค้าบที่ยุกับป๊านานขนาดนี้้้<br />ป๊าร้ากเด่กขึ้นทุกวานเยยยย</p>
+          <p style="--d:2">ขอโทดนะคะที่ป๊าเอ๋อๆ ดื้อๆ มึนๆ งี่เง่าปายบ้างงง<br />แต่ป๊าก้ยางร้ากเด่กยุเหมือนเดิมมม<br />ป๊สอยากจาบอกว่าร้ากนะคะอัยเด่กกก</p>
+          <p style="--d:3">จายุแบบนี้อีกนานแสนนานเยยย<br />นาน100ปีก้ด้ายยย<br />ร้ากเทอนะครับ จุ้บบบๆ</p>
+          <p class="letter-sign" style="--d:4">อัยแว่นเบียวว 💌</p>
+        </article>
+      </div>
+      <button class="btn btn-yes" id="btn-letter-love">บอกร้ากกก 💗</button>
+      <p class="love-msg" id="letter-love-msg" aria-live="polite"></p>
+    </section>
+
+    <!-- ตอบผิดเกิน 10 ครั้ง -->
+    <section class="step" id="step-fail">
+      <h2>อ้าว ทามมายจามม่ายด้ายย 🥹</h2>
+      <button class="btn btn-submit" id="btn-restart">ห้ายโอกาสอ่ะะะ</button>
+    </section>
+
+    <section class="step" id="step-ngo">
+      <div class="emoji">🥹</div>
+      <h2>อื้อ ง้อด้วย</h2>
+      <p class="msg" id="ngo-count">ง้อไปแล้ว 0/100 ครั้ง</p>
+      <button class="btn btn-submit" id="btn-ngo">ง้อ🥺</button>
+    </section>
+
+    <section class="step" id="step-ask">
+      <div class="emoji">💞</div>
+      <h2>ร้ากหม้าย</h2>
+      <button class="btn btn-yes" id="btn-ask-yes">ร้ากก 💗</button>
+    </section>
+
+    <section class="step" id="step-forgiven">
+      <div class="emoji">😽💖</div>
+      <h2>หายงอนล่ะะะะะ</h2>
+      <button class="btn btn-submit" id="btn-back">กลับไปหน้าเดิม</button>
+    </section>
+
+  </main>
+
+  <div class="counter" id="counter">ตอบผิด 0/10 ครั้ง</div>
+  <div class="signature">จาก : อัยแว่นเบียวว</div>
+  <script src="script.js"></script>
+</body>
+</html>
